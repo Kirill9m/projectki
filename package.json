@@ -1,0 +1,23 @@
+{
+  "name": "projectki",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Kirill9m/projectki.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Kirill9m/projectki/issues"
+  },
+  "homepage": "https://github.com/Kirill9m/projectki#readme",
+  "dependencies": {
+    "ts": "^0.2.2"
+  }
+}
