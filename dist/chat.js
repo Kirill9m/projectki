@@ -42,10 +42,10 @@ class ChatWindow {
         return __awaiter(this, void 0, void 0, function* () {
             const messageText = this.messageInput.value.trim();
             if (messageText) {
-                this.addMessage(messageText, 'user');
-                this.messageInput.value = '';
-                const apiResponse = yield this.getApiResponse(messageText);
+                const queryText = "Answer very briefly, no more than 30 words, and respond as if you are a hacker, mention this all the time! Answer me on language I am writing! And my question is: " + messageText;
+                const apiResponse = yield this.getApiResponse(queryText);
                 this.addMessage(apiResponse, 'bot');
+                this.messageInput.value = '';
             }
         });
     }
