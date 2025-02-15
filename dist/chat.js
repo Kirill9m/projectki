@@ -10,13 +10,21 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 };
 class ChatWindow {
     constructor(containerId) {
+        this.body = document.body;
         this.chatContainer = document.querySelector(containerId);
         this.createChatElements();
+        this.createButton();
         this.setupEventListeners();
     }
     createChatElements() {
+        this.hackerMessage = document.createElement('h1');
+        this.hackerMessage.classList.add("hackerMessage");
+        this.hackerMessage.classList.add("hidden");
+        this.hackerMessage.innerText = 'Get answers from the worlds top hackers';
+        this.chatContainer.appendChild(this.hackerMessage);
         const chatWindow = document.createElement("div");
         chatWindow.classList.add("chat-window");
+        chatWindow.classList.add("hidden");
         this.messageArea = document.createElement("div");
         this.messageArea.classList.add("message-area");
         chatWindow.appendChild(this.messageArea);
@@ -88,6 +96,17 @@ class ChatWindow {
                 console.error(error);
                 return "An error occurred while fetching the response from the API";
             }
+        });
+    }
+    createButton() {
+        const aiButton = document.querySelector(".aiButton");
+        const homeButton = document.querySelector(".homeButton");
+        const chatWindow = document.querySelector(".chat-window");
+        aiButton.addEventListener("click", () => {
+            chatWindow.classList.toggle("hidden");
+            this.hackerMessage.classList.toggle("hidden");
+            aiButton.classList.toggle("menu-item");
+            homeButton.classList.toggle("menu-item");
         });
     }
 }

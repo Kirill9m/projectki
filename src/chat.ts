@@ -3,16 +3,26 @@ class ChatWindow {
   private messageInput!: HTMLTextAreaElement;
   private sendButton!: HTMLButtonElement;
   private messageArea!: HTMLElement;
+  private hackerMessage!: HTMLElement;
+  private body: HTMLElement = document.body;
 
   constructor(containerId: string) {
     this.chatContainer = document.querySelector(containerId) as HTMLElement;
     this.createChatElements();
+    this.createButton();
     this.setupEventListeners();
   }
 
   private createChatElements() {
+    this.hackerMessage = document.createElement('h1');
+    this.hackerMessage.classList.add("hackerMessage");
+    this.hackerMessage.classList.add("hidden");
+    this.hackerMessage.innerText = 'Get answers from the worlds top hackers';
+    this.chatContainer.appendChild(this.hackerMessage);
+
     const chatWindow = document.createElement("div");
     chatWindow.classList.add("chat-window");
+    chatWindow.classList.add("hidden");
 
     this.messageArea = document.createElement("div");
     this.messageArea.classList.add("message-area");
@@ -99,6 +109,19 @@ class ChatWindow {
       console.error(error);
       return "An error occurred while fetching the response from the API";
     }
+  }
+
+  private createButton() {
+    const aiButton = document.querySelector(".aiButton") as HTMLElement;
+    const homeButton = document.querySelector(".homeButton") as HTMLElement;
+    const chatWindow = document.querySelector(".chat-window") as HTMLElement;
+
+    aiButton.addEventListener("click", () => {
+      chatWindow.classList.toggle("hidden");
+      this.hackerMessage.classList.toggle("hidden");
+        aiButton.classList.toggle("menu-item");
+        homeButton.classList.toggle("menu-item");
+    });
   }
 }
 

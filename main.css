@@ -1,22 +1,35 @@
-@import url('https://fonts.googleapis.com/css2?family=Anonymous+Pro:ital,wght@0,400;0,700;1,400;1,700&family=Poppins:wght@500&display=swap');
-
 * {
   padding: 0;
   margin: 0;
   box-sizing: border-box;
+  background-color: black;
 }
 
 #chatContainer {
-  display: flex;
-  justify-content: center;
+  display: grid;
+  grid-template-rows: auto 1fr;
+  justify-items: center;
   align-items: center;
   height: 100vh;
   background-color: black;
-  font-family: 'Courier New', Courier, monospace;
+  font-family: "Poppins", serif;
+  position: relative;
+}
+
+.hackerMessage {
+  color: #00ff00;
+  font-family: "Poppins", serif;
+  font-size: 16px;
+  font-weight: bold;
+  text-align: center;
+  width: 100%;
+  padding-top: 15rem;
+  z-index: 999;
 }
 
 .chat-window {
-  width: 400px;
+  position: relative;
+  width: 350px;
   height: 500px;
   border: 2px solid #00FF00;
   border-radius: 8px;
@@ -41,7 +54,7 @@
 .message {
   padding: 8px;
   margin-bottom: 5px;
-  background-color: rgba(0, 255, 0, 0.1);
+  background-color: black;
   border-radius: 5px;
   text-align: left;
   font-family: "Poppins", serif;
@@ -81,4 +94,62 @@
 .send-button:hover {
   background-color: #32CD32;
   box-shadow: 0 0 10px rgba(50, 205, 50, 0.5);
+}
+
+.hidden {
+  display: none;
+}
+
+.matrix-menu {
+  background-color: black;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  padding: 15px 0;
+  box-shadow: 0 1px 1px #567de994;
+  z-index: 1000;
+}
+
+.matrix-menu ul {
+  list-style: none;
+  text-align: center;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  justify-content: center;
+}
+
+.matrix-menu li {
+  margin: 0 30px;
+  font-size: 20px;
+}
+
+.matrix-menu a {
+  text-decoration: none;
+  color: #00ff00;
+  font-size: 22px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  position: relative;
+  display: inline-block;
+  transition: color 0.3s ease;
+  cursor: pointer;
+}
+
+.matrix-menu a:hover {
+  color: #567de994;
+  text-shadow: 0 0 2px #567de994, 0 0 10px #567de994;
+}
+
+@keyframes matrixRain {
+  0% { transform: translateY(-100%); }
+  100% { transform: translateY(100vh); }
+}
+
+.menu-item {
+  a {
+    color: #567de994;
+    text-shadow: 0 0 2px #567de994, 0 0 10px #567de994;
+  }
 }
