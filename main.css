@@ -9,7 +9,7 @@
   display: grid;
   grid-template-rows: auto 1fr;
   justify-items: center;
-  align-items: center;
+  /* align-items: center; */
   height: 100vh;
   background-color: black;
   font-family: "Poppins", serif;
@@ -23,8 +23,9 @@
   font-weight: bold;
   text-align: center;
   width: 100%;
-  padding-top: 15rem;
+  padding-top: 5rem;
   z-index: 999;
+  padding-bottom: 1rem;
 }
 
 .chat-window {
