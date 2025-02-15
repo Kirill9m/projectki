@@ -9,11 +9,11 @@
   display: grid;
   grid-template-rows: auto 1fr;
   justify-items: center;
-  /* align-items: center; */
   height: 100vh;
   background-color: black;
   font-family: "Poppins", serif;
   position: relative;
+  padding-top: 80px; /* Добавляем отступ сверху, чтобы контейнер не перекрывался меню */
 }
 
 .hackerMessage {
@@ -153,4 +153,38 @@
     color: #567de994;
     text-shadow: 0 0 2px #567de994, 0 0 10px #567de994;
   }
+}
+
+.welcomeText {
+  color: #00FF00;
+  margin-top: 10rem;
+  padding: 20px;
+  font-size: 16px;
+  font-family: 'Courier New', Courier, monospace;
+
+  border: 2px solid #00FF00;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0, 255, 0, 0.5);
+  max-width: 400px;
+  margin: 5rem auto;
+  text-align: left;
+  line-height: 1.6;
+}
+
+.welcomeText h1 {
+  font-size: 20px;
+  font-weight: bold;
+}
+
+.welcomeText p {
+  font-size: 16px;
+  margin-bottom: 10px;
+}
+
+.welcomeText code {
+  color: #dcdcdd;
+  background-color: #333333;
+  padding: 5px;
+  border-radius: 5px;
+  font-size: 15px;
 }

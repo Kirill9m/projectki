@@ -4,7 +4,6 @@ class ChatWindow {
   private sendButton!: HTMLButtonElement;
   private messageArea!: HTMLElement;
   private hackerMessage!: HTMLElement;
-  private body: HTMLElement = document.body;
 
   constructor(containerId: string) {
     this.chatContainer = document.querySelector(containerId) as HTMLElement;
@@ -115,12 +114,15 @@ class ChatWindow {
     const aiButton = document.querySelector(".aiButton") as HTMLElement;
     const homeButton = document.querySelector(".homeButton") as HTMLElement;
     const chatWindow = document.querySelector(".chat-window") as HTMLElement;
+    const welcomeText = document.querySelector(".welcomeText") as HTMLElement;
 
     aiButton.addEventListener("click", () => {
       chatWindow.classList.toggle("hidden");
+      welcomeText.classList.toggle("hidden");
       this.hackerMessage.classList.toggle("hidden");
         aiButton.classList.toggle("menu-item");
         homeButton.classList.toggle("menu-item");
+
     });
   }
 }

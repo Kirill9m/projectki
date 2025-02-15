@@ -10,7 +10,6 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 };
 class ChatWindow {
     constructor(containerId) {
-        this.body = document.body;
         this.chatContainer = document.querySelector(containerId);
         this.createChatElements();
         this.createButton();
@@ -102,8 +101,10 @@ class ChatWindow {
         const aiButton = document.querySelector(".aiButton");
         const homeButton = document.querySelector(".homeButton");
         const chatWindow = document.querySelector(".chat-window");
+        const welcomeText = document.querySelector(".welcomeText");
         aiButton.addEventListener("click", () => {
             chatWindow.classList.toggle("hidden");
+            welcomeText.classList.toggle("hidden");
             this.hackerMessage.classList.toggle("hidden");
             aiButton.classList.toggle("menu-item");
             homeButton.classList.toggle("menu-item");
