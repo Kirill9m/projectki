@@ -10,29 +10,29 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 };
 class ChatWindow {
     constructor(containerId) {
-        this.chatContainer = document.getElementById(containerId);
+        this.chatContainer = document.querySelector(containerId);
         this.createChatElements();
         this.setupEventListeners();
     }
     createChatElements() {
-        const chatWindow = document.createElement('div');
-        chatWindow.classList.add('chat-window');
-        this.messageArea = document.createElement('div');
-        this.messageArea.classList.add('message-area');
+        const chatWindow = document.createElement("div");
+        chatWindow.classList.add("chat-window");
+        this.messageArea = document.createElement("div");
+        this.messageArea.classList.add("message-area");
         chatWindow.appendChild(this.messageArea);
-        this.messageInput = document.createElement('textarea');
-        this.messageInput.classList.add('message-input');
+        this.messageInput = document.createElement("textarea");
+        this.messageInput.classList.add("message-input");
         chatWindow.appendChild(this.messageInput);
-        this.sendButton = document.createElement('button');
-        this.sendButton.innerText = 'Send';
-        this.sendButton.classList.add('send-button');
+        this.sendButton = document.createElement("button");
+        this.sendButton.innerText = "Send";
+        this.sendButton.classList.add("send-button");
         chatWindow.appendChild(this.sendButton);
         this.chatContainer.appendChild(chatWindow);
     }
     setupEventListeners() {
-        this.sendButton.addEventListener('click', () => this.sendMessage());
-        this.messageInput.addEventListener('keydown', (event) => {
-            if (event.key === 'Enter' && !event.shiftKey) {
+        this.sendButton.addEventListener("click", () => this.sendMessage());
+        this.messageInput.addEventListener("keydown", (event) => {
+            if (event.key === "Enter" && !event.shiftKey) {
                 event.preventDefault();
                 this.sendMessage();
             }
@@ -42,50 +42,54 @@ class ChatWindow {
         return __awaiter(this, void 0, void 0, function* () {
             const messageText = this.messageInput.value.trim();
             if (messageText) {
-                const queryText = "Answer very briefly, no more than 30 words, and respond as if you are a hacker, mention this all the time! Answer me on language I am writing! And my question is: " + messageText;
+                this.addMessage(messageText, "user");
+                const queryText = "Respond as if you are a hacker, mention this all the time! Answer me on language I am writing! And my question is: " +
+                    messageText;
                 const apiResponse = yield this.getApiResponse(queryText);
-                this.addMessage(apiResponse, 'bot');
-                this.messageInput.value = '';
+                this.addMessage(apiResponse, "bot");
+                this.messageInput.value = "";
             }
         });
     }
     addMessage(messageText, sender) {
-        const message = document.createElement('div');
-        message.classList.add('message', sender);
+        const message = document.createElement("div");
+        message.classList.add("message", sender);
         message.innerText = messageText;
         this.messageArea.appendChild(message);
         this.messageArea.scrollTop = this.messageArea.scrollHeight;
     }
     getApiResponse(query) {
         return __awaiter(this, void 0, void 0, function* () {
-            const apiKey = 'AIzaSyD3N_MxeyDTg1ZoDrKwlDKK8quqWSD9Drc';
+            const apiKey = "AIzaSyD3N_MxeyDTg1ZoDrKwlDKK8quqWSD9Drc";
             const url = `https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=${apiKey}`;
             const requestBody = {
-                contents: [{
-                        parts: [{ text: query }]
-                    }]
+                contents: [
+                    {
+                        parts: [{ text: query }],
+                    },
+                ],
             };
             try {
                 const response = yield fetch(url, {
-                    method: 'POST',
+                    method: "POST",
                     headers: {
-                        'Content-Type': 'application/json'
+                        "Content-Type": "application/json",
                     },
-                    body: JSON.stringify(requestBody)
+                    body: JSON.stringify(requestBody),
                 });
                 if (!response.ok) {
-                    throw new Error('Error fetching data from API');
+                    throw new Error("Error fetching data from API");
                 }
                 const data = yield response.json();
                 const botResponseText = data.candidates[0].content.parts[0].text;
-                return botResponseText || 'No response from API';
+                return botResponseText || "No response from API";
             }
             catch (error) {
                 console.error(error);
-                return 'An error occurred while fetching the response from the API';
+                return "An error occurred while fetching the response from the API";
             }
         });
     }
 }
-const chat = new ChatWindow('chatContainer');
+const chat = new ChatWindow("#chatContainer");
 //# sourceMappingURL=chat.js.map
