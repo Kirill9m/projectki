@@ -18,6 +18,7 @@
   },
   "homepage": "https://github.com/Kirill9m/projectki#readme",
   "dependencies": {
+    "env": "^0.0.2",
     "ts": "^0.2.2"
   }
 }

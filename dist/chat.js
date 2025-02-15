@@ -10,51 +10,51 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 };
 class ChatWindow {
     constructor(containerId) {
-        this.chatContainer = document.getElementById(containerId);
-        this.createChatElements();
-        this.setupEventListeners();
+        this.createChatElements(containerId);
     }
-    createChatElements() {
+    createChatElements(containerId) {
+        const chatContainer = document.getElementById(containerId);
         const chatWindow = document.createElement('div');
         chatWindow.classList.add('chat-window');
-        this.messageArea = document.createElement('div');
-        this.messageArea.classList.add('message-area');
-        chatWindow.appendChild(this.messageArea);
-        this.messageInput = document.createElement('textarea');
-        this.messageInput.classList.add('message-input');
-        chatWindow.appendChild(this.messageInput);
-        this.sendButton = document.createElement('button');
-        this.sendButton.innerText = 'Send';
-        this.sendButton.classList.add('send-button');
-        chatWindow.appendChild(this.sendButton);
-        this.chatContainer.appendChild(chatWindow);
+        const messageArea = document.createElement('div');
+        messageArea.classList.add('message-area');
+        chatWindow.appendChild(messageArea);
+        const messageInput = document.createElement('textarea');
+        messageInput.classList.add('message-input');
+        chatWindow.appendChild(messageInput);
+        const sendButton = document.createElement('button');
+        sendButton.innerText = 'Send';
+        sendButton.classList.add('send-button');
+        chatWindow.appendChild(sendButton);
+        chatContainer.appendChild(chatWindow);
+        this.setupEventListeners(messageInput, sendButton, messageArea);
     }
-    setupEventListeners() {
-        this.sendButton.addEventListener('click', () => this.sendMessage());
-        this.messageInput.addEventListener('keydown', (event) => {
+    setupEventListeners(messageInput, sendButton, messageArea) {
+        sendButton.addEventListener('click', () => this.sendMessage(messageInput, messageArea));
+        messageInput.addEventListener('keydown', (event) => {
             if (event.key === 'Enter' && !event.shiftKey) {
                 event.preventDefault();
-                this.sendMessage();
+                this.sendMessage(messageInput, messageArea);
             }
         });
     }
-    sendMessage() {
+    sendMessage(messageInput, messageArea) {
         return __awaiter(this, void 0, void 0, function* () {
-            const messageText = this.messageInput.value.trim();
+            const messageText = messageInput.value.trim();
             if (messageText) {
-                const queryText = "Answer very briefly, no more than 30 words, and respond as if you are a hacker, mention this all the time! Answer me on language I am writing! And my question is: " + messageText;
+                const queryText = "Respond as if you are a hacker, mention this all the time! Answer me on language I am writing! And my question is: " + messageText;
                 const apiResponse = yield this.getApiResponse(queryText);
-                this.addMessage(apiResponse, 'bot');
-                this.messageInput.value = '';
+                this.addMessage(apiResponse, 'bot', messageArea);
+                messageInput.value = '';
             }
         });
     }
-    addMessage(messageText, sender) {
+    addMessage(messageText, sender, messageArea) {
         const message = document.createElement('div');
         message.classList.add('message', sender);
         message.innerText = messageText;
-        this.messageArea.appendChild(message);
-        this.messageArea.scrollTop = this.messageArea.scrollHeight;
+        messageArea.appendChild(message);
+        messageArea.scrollTop = messageArea.scrollHeight;
     }
     getApiResponse(query) {
         return __awaiter(this, void 0, void 0, function* () {
