@@ -10,6 +10,7 @@ class ChatWindow {
     this.createChatElements();
     this.createButton();
     this.setupEventListeners();
+    this.generateRandomMessage();
   }
 
   private createChatElements() {
@@ -107,6 +108,25 @@ class ChatWindow {
     } catch (error) {
       console.error(error);
       return "An error occurred while fetching the response from the API";
+    }
+  }
+
+  private async generateRandomMessage() {
+    const queryText = "Generate a random message from a hacker. Make it sound like a hacker would say it!";
+  
+    const apiResponse = await this.getApiResponse(queryText);
+  
+    this.addResponseToContainer(apiResponse);
+  }
+
+  private addResponseToContainer(responseText: string) {
+    const responseContainer = document.querySelector("#response-container") as HTMLElement;
+  
+    if (responseContainer) {
+      const responseMessage = document.createElement("div");
+      responseMessage.classList.add("response-message");
+      responseMessage.innerText = responseText;
+      responseContainer.appendChild(responseMessage);
     }
   }
 
